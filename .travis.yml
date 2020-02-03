@@ -17,6 +17,8 @@ script:
 
 before_deploy:
   - ibmcloud login -r us-south --apikey ${IBMCLOUD_API_KEY}
+  - ibmcloud cr region-set us-south
+  - ibmcloud cr login
   # - docker login -u="${QUAY_ID}" -p="${QUAY_TOKEN}" us.icr.io
 
 deploy:
