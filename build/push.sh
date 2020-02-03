@@ -1,7 +1,7 @@
 docker push "us.icr.io/dalehille/webapp:${TRAVIS_TAG}" &&
 
 curl --request POST
-       --url ${RAZEE_API}/api/v1/channels/${RAZEE_CHANNEL}/version
+       --url '${RAZEE_API}/api/v1/channels/${RAZEE_CHANNEL}/version'
        --header 'content-type: text/yaml'
        --header 'razee-org-key: ${RAZEE_ORG_KEY}'
        --header 'resource-description: ${TRAVIS_COMMIT_MESSAGE}'
