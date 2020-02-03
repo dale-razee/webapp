@@ -8,6 +8,7 @@ metadata:
   labels:
     razee/watch-resource: "lite"
   name: webapp
+  namespace: default
 spec:
   replicas: 1
   revisionHistoryLimit: 0
