@@ -16,7 +16,9 @@ script:
   - ./build/process-template.sh kubernetes/webapp/resource.yaml >/tmp/resource.yaml
 
 before_deploy:
-  - ic login --apikey "${IBMCLOUD_API_KEY}"
+  - ibmcloud login -r us-south --apikey ${IBMCLOUD_API_KEY}
+  - ibmcloud cr region-set us-south
+  - ibmcloud cr login
   # - docker login -u="${QUAY_ID}" -p="${QUAY_TOKEN}" us.icr.io
 
 deploy:
