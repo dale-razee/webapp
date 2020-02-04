@@ -9,7 +9,7 @@ install:
   - curl -sL https://ibm.biz/idt-installer | bash
 
 script:
-  - export VERSION="${TRAVIS_BRANCH}-${TRAVIS_PULL_REQUEST}"
+  - export VERSION="${TRAVIS_BRANCH}-${TRAVIS_BUILD_NUMBER}"
   - echo "setting version to ${VERSION}"
   - docker build --rm -t "us.icr.io/dalehille/webapp:${VERSION}" .
   # - docker build --rm -t "us.icr.io/dalehille/webapp:${TRAVIS_COMMIT}" .
