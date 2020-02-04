@@ -1,7 +1,4 @@
-docker push "us.icr.io/dalehille/webapp:${TRAVIS_TAG}" &&
-
-env
-echo ${RAZEE_API}
+docker push "us.icr.io/dalehille/webapp:${TRAVIS_TAG}" 
 
 curl --request POST \
        --url "${RAZEE_API}/api/v1/channels/${RAZEE_CHANNEL}/version" \
