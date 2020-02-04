@@ -38,7 +38,7 @@ items:
         - env:
           - name: APP_VERSION
             value: "{{TRAVIS_COMMIT}}"
-          image: "us.icr.io/dalehille/webapp:{{TRAVIS_TAG}}"
+          image: "us.icr.io/dalehille/webapp:{{VERSION}}"
           imagePullPolicy: Always
           name: webapp
           ports:
