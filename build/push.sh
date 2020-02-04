@@ -11,4 +11,4 @@ curl --request POST \
        --header "resource-name: ${TRAVIS_TAG}" \
        --header "x-api-key: ${X_API_KEY}" \
        --header "x-user-id: ${X_USER_ID}" \
-       --data @/tmp/resource.yaml
+       --data-binary @/tmp/resource.yaml
