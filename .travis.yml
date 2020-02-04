@@ -9,10 +9,16 @@ install:
   - curl -sL https://ibm.biz/idt-installer | bash
 
 script:
-  - docker build --rm -t "us.icr.io/dalehille/webapp:${TRAVIS_COMMIT}" .
-  - if [ -n "${TRAVIS_TAG}" ]; then docker tag us.icr.io/dalehille/webapp:${TRAVIS_COMMIT} us.icr.io/dalehille/webapp:${TRAVIS_TAG}; fi
+  - export TIMESTAMP=$(date '+%Y%m%d%H%M%S')
+  - export VERSION="${TRAVIS_BRANCH}-${TIMESTAMP}"
+  - echo "setting version to ${VERSION}"
+  - docker build --rm -t "us.icr.io/dalehille/webapp:${VERSION}" .
+  # - docker build --rm -t "us.icr.io/dalehille/webapp:${TRAVIS_COMMIT}" .
+  # - if [ -n "${TRAVIS_TAG}" ]; then docker tag us.icr.io/dalehille/webapp:${TRAVIS_COMMIT} us.icr.io/dalehille/webapp:${TRAVIS_TAG}; fi
+  - docker tag us.icr.io/dalehille/webapp:${VERSION} us.icr.io/dalehille/webapp:${VERSION}
   - docker images
   - ./build/process-template.sh kubernetes/webapp/resource.yaml >/tmp/resource.yaml
+  - cat /tmp/resource.yaml
 
 before_deploy:
   - ibmcloud login -r us-south --apikey ${IBMCLOUD_API_KEY}
