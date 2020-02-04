@@ -3,7 +3,9 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  const appVersion = process.env.APP_VERSION || '';
+  const version = 'https://github.com/dale-razee/webapp/commit/' + appVersion;
+  res.render('index', { title: 'Webapp', version: version });
 });
 
 module.exports = router;
