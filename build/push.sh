@@ -4,7 +4,7 @@ docker push "us.icr.io/dalehille/webapp:${VERSION}"
 cat /tmp/resource.yaml
 
 set -x 
-curl --verbose --request POST \
+curl --verbose \
        --url "${RAZEE_API}/api/v1/channels/${RAZEE_CHANNEL}/version" \
        --header "content-type: text/yaml" \
        --header "razee-org-key: ${RAZEE_ORG_KEY}" \
