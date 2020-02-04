@@ -1,46 +1,73 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: List
 metadata:
-  annotations:
-    version: "{{TRAVIS_COMMIT}}"
-    razee.io/git-repo: "{{{GIT_REMOTE}}}"
-    razee.io/commit-sha: "{{TRAVIS_COMMIT}}"
-  labels:
-    razee/watch-resource: "lite"
-  name: webapp
+  name: Webapp
   namespace: default
-spec:
-  replicas: 1
-  revisionHistoryLimit: 0
-  selector:
-    matchLabels:
-      app: webapp
-  strategy:
-    type: RollingUpdate
-  template:
-    metadata:
-      labels:
+items:
+
+- kind: Deployment
+  apiVersion: apps/v1
+  metadata:
+    annotations:
+      version: "{{TRAVIS_COMMIT}}"
+      razee.io/git-repo: "{{{GIT_REMOTE}}}"
+      razee.io/commit-sha: "{{TRAVIS_COMMIT}}"
+    labels:
+      razee/watch-resource: "lite"
+    name: webapp
+    namespace: default
+  spec:
+    replicas: 1
+    revisionHistoryLimit: 0
+    selector:
+      matchLabels:
         app: webapp
-        razee/watch-resource: "lite"
-      name: webapp
-    spec:
-      securityContext:
-        fsGroup: 999
-        runAsUser: 999
-      containers:
-      - env:
-        - name: APP_VERSION
-          value: "{{TRAVIS_COMMIT}}"
-        image: "us.icr.io/dalehille/webapp:{{TRAVIS_TAG}}"
-        imagePullPolicy: Always
+    strategy:
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: webapp
+          razee/watch-resource: "lite"
         name: webapp
-        ports:
-        - containerPort: 3333
-          protocol: TCP
-        resources:
-          requests:
-            cpu: 100m
-            memory: 80Mi
-          limits:
-            cpu: 500m
-            memory: 256Mi
+      spec:
+        securityContext:
+          fsGroup: 999
+          runAsUser: 999
+        containers:
+        - env:
+          - name: APP_VERSION
+            value: "{{TRAVIS_COMMIT}}"
+          image: "us.icr.io/dalehille/webapp:{{TRAVIS_TAG}}"
+          imagePullPolicy: Always
+          name: webapp
+          ports:
+          - containerPort: 3333
+            protocol: TCP
+          resources:
+            requests:
+              cpu: 100m
+              memory: 80Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      app: webapp
+    name: webapp-lb
+    namespace: default
+    annotations:
+      version: "{{TRAVIS_COMMIT}}"
+      razee.io/git-repo: "{{{GIT_REMOTE}}}"
+      razee.io/commit-sha: "{{TRAVIS_COMMIT}}"
+  spec:
+    externalTrafficPolicy: Cluster
+    ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 3000
+    selector:
+      app: webapp
+    type: LoadBalancer
