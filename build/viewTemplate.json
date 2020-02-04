@@ -1,5 +1,6 @@
 {
     "TRAVIS_COMMIT": "${TRAVIS_COMMIT}",
     "GIT_REMOTE": "${GIT_REMOTE}",
-    "TRAVIS_TAG": "${TRAVIS_TAG}"
+    "TRAVIS_TAG": "${TRAVIS_TAG}",
+    "VERSION": "${VERSION}"
 }
