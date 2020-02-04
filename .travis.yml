@@ -21,6 +21,14 @@ before_deploy:
   # - docker login -u="${QUAY_ID}" -p="${QUAY_TOKEN}" us.icr.io
 
 deploy:
+  # Deploy master builds
+  - provider: script
+    script: bash build/push.sh
+    skip_cleanup: true
+    on:
+      branch: master
+
+deploy:
   # Deploy alpha builds
   - provider: script
     script: bash build/push.sh
