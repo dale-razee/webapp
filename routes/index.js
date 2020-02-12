@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   const appVersion = process.env.APP_VERSION || '';
   const version = 'https://github.com/dale-razee/webapp/commit/' + appVersion;
-  res.render('index', { title: 'Webapp', version: version });
+  res.render('index', { title: 'Webapp', version: version, build: build });
 });
 
 module.exports = router;

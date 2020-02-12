@@ -38,6 +38,8 @@ items:
         - env:
           - name: APP_VERSION
             value: "{{TRAVIS_COMMIT}}"
+          - name: BUILD_NUMBER
+            value: "{{TRAVIS_BUILD_NUMBER}}"
           image: "us.icr.io/dalehille/webapp:{{VERSION}}"
           imagePullPolicy: Always
           name: webapp
