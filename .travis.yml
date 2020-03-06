@@ -14,6 +14,7 @@ script:
   - docker build --rm -t "us.icr.io/dalehille/webapp:${VERSION}" .
   # - docker build --rm -t "us.icr.io/dalehille/webapp:${TRAVIS_COMMIT}" .
   # - if [ -n "${TRAVIS_TAG}" ]; then docker tag us.icr.io/dalehille/webapp:${TRAVIS_COMMIT} us.icr.io/dalehille/webapp:${TRAVIS_TAG}; fi
+  - if [ "${TRAVIS_BRANCH}" = "master" ]; then export TRAVIS_TAG="master";  fi
   - docker tag us.icr.io/dalehille/webapp:${VERSION} us.icr.io/dalehille/webapp:${VERSION}
   - docker images
   - ./build/process-template.sh kubernetes/webapp/resource.yaml >/tmp/resource.yaml
