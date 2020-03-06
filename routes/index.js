@@ -4,7 +4,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   const appVersion = process.env.APP_VERSION || '';
-  res.render('index', { title: 'Webapp-test', version: appVersion });
+  res.render('index', { title: 'Webapp-test-2', version: appVersion });
 });
 
 module.exports = router;
