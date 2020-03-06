@@ -37,6 +37,7 @@ deploy:
     file: /tmp/resource.yaml
     overwrite: true
     skip_cleanup: true
+    target_commitish: "${TRAVIS_COMMIT}"
     prerelease: true
     on:
       branch: master
