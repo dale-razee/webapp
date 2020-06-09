@@ -62,8 +62,12 @@ jobs:
     #   run: |
     #     docker push $REGISTRY_HOSTNAME/$ICR_NAMESPACE/$IMAGE_NAME:$GITHUB_SHA
 
+        # ./build/process-template.sh kubernetes/webapp/resource.yaml > /tmp/resource.yaml
+        # cat /tmp/resource.yaml
     # create the resource.yaml file
     - name: Create resource.yaml
       run: |
-        ./build/process-template.sh kubernetes/webapp/resource.yaml > /tmp/resource.yaml
-        cat /tmp/resource.yaml
+        ls -ltras .
+        envsubst < "./build/viewTemplate.json" > /tmp/view.json
+        cat /tmp/view.json
+        npx mustache /tmp/view.json ./kubernetes/webapp/resource.yaml > /tmp/resource.yaml
