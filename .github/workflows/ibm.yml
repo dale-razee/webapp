@@ -67,7 +67,8 @@ jobs:
     # create the resource.yaml file
     - name: Create resource.yaml
       run: |
-        VERSION="${GITHUB_REF}-${GITHUB_RUN_NUMBER}"
+        env
+        export VERSION="${GITHUB_REF}-${GITHUB_RUN_NUMBER}"
         envsubst < "./build/viewTemplate.json" > /tmp/view.json
         echo $?
         cat /tmp/view.json
