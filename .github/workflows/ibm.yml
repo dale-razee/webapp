@@ -12,6 +12,9 @@ on:
   release:
     types: [created]
 
+# on:
+#   push
+
 # Environment variables available to all jobs and steps in this workflow
 env:
   GITHUB_SHA: ${{ github.sha }}
@@ -20,7 +23,6 @@ env:
   ICR_NAMESPACE: ${{ secrets.ICR_NAMESPACE }}
   REGISTRY_HOSTNAME: us.icr.io
   IMAGE_NAME: webapp
-  IKS_CLUSTER: example-iks-cluster-name-or-id
   PORT: 5001
 
 jobs:
@@ -38,7 +40,6 @@ jobs:
         curl -fsSL https://clis.cloud.ibm.com/install/linux | sh
         ibmcloud --version
         ibmcloud config --check-version=false
-        ibmcloud plugin install -f kubernetes-service
         ibmcloud plugin install -f container-registry
 
     # Authenticate with IBM Cloud CLI
@@ -56,8 +57,20 @@ jobs:
           --build-arg GITHUB_REF="$GITHUB_REF" .
 
     # Push the image to IBM Container Registry
-    - name: Push the image to ICR
+    # - name: Push the image to ICR
+    #   run: |
+    #     docker push $REGISTRY_HOSTNAME/$ICR_NAMESPACE/$IMAGE_NAME:$GITHUB_SHA
+
+        # ./build/process-template.sh kubernetes/webapp/resource.yaml > /tmp/resource.yaml
+        # cat /tmp/resource.yaml
+    # create the resource.yaml file
+    - name: Create resource.yaml
       run: |
-        docker push $REGISTRY_HOSTNAME/$ICR_NAMESPACE/$IMAGE_NAME:$GITHUB_SHA
-
-
+        env
+        export VERSION="${GITHUB_REF}-${GITHUB_RUN_NUMBER}"
+        envsubst < "./build/viewTemplate.json" > /tmp/view.json
+        echo $?
+        cat /tmp/view.json
+        npx mustache /tmp/view.json ./kubernetes/webapp/resource.yaml > /tmp/resource.yaml
+        echo $?
+        cat /tmp/resource.yaml

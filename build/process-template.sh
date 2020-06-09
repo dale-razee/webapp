@@ -18,11 +18,15 @@ set -e
 
 FILE="${1}"
 THIS_DIR=$(dirname "${BASH_SOURCE[0]}")
-TRAVIS_COMMIT="${TRAVIS_COMMIT:=$(git rev-parse HEAD)}"
-export TRAVIS_COMMIT
-GIT_REMOTE="$(git remote get-url origin)"
-export GIT_REMOTE
+# TRAVIS_COMMIT="${TRAVIS_COMMIT:=$(git rev-parse HEAD)}"
+# export TRAVIS_COMMIT
+# GIT_REMOTE="$(git remote get-url origin)"
+# GIT_REMOTE=${GITHUB_REPOSITORY}
+# export GIT_REMOTE
+VERSION="${GITHUB_REF}-${GITHUB_RUN_NUMBER}"
 
 envsubst <"${THIS_DIR}/viewTemplate.json" >/tmp/view.json
+
+cat /tmp/view.json
 
 npx mustache /tmp/view.json "${FILE}"

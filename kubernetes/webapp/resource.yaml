@@ -9,9 +9,9 @@ items:
   apiVersion: apps/v1
   metadata:
     annotations:
-      version: "{{TRAVIS_COMMIT}}"
-      razee.io/git-repo: "{{{GIT_REMOTE}}}"
-      razee.io/commit-sha: "{{TRAVIS_COMMIT}}"
+      version: "{{GITHUB_SHA}}"
+      razee.io/git-repo: "{{{GITHUB_REPOSITORY}}}"
+      razee.io/commit-sha: "{{GITHUB_SHA}}"
     labels:
       razee/watch-resource: "lite"
     name: webapp
@@ -59,9 +59,9 @@ items:
     name: webapp-lb
     namespace: default
     annotations:
-      version: "{{TRAVIS_COMMIT}}"
-      razee.io/git-repo: "{{{GIT_REMOTE}}}"
-      razee.io/commit-sha: "{{TRAVIS_COMMIT}}"
+      version: "{{GITHUB_SHA}}"
+      razee.io/git-repo: "{{{GITHUB_REPOSITORY}}}"
+      razee.io/commit-sha: "{{GITHUB_SHA}}"
   spec:
     externalTrafficPolicy: Cluster
     ports:
