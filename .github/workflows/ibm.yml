@@ -67,7 +67,10 @@ jobs:
     # create the resource.yaml file
     - name: Create resource.yaml
       run: |
-        ls -ltras .
+        VERSION="${GITHUB_REF}-${GITHUB_RUN_NUMBER}"
         envsubst < "./build/viewTemplate.json" > /tmp/view.json
+        echo $?
         cat /tmp/view.json
         npx mustache /tmp/view.json ./kubernetes/webapp/resource.yaml > /tmp/resource.yaml
+        echo $?
+        cat /tmp/resource.yaml
