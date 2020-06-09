@@ -34,5 +34,4 @@ curl --verbose \
     --form 'map={"localfile":["variables.file"]}' \
     --form localfile=@/tmp/resource.yaml
 
-
 echo $?
