@@ -32,7 +32,7 @@ curl --verbose \
     "operationName": "addChannelVersion"
   }' \
     --form 'map={"localfile":["variables.file"]}' \
-    --form localfile=@resource.yaml
+    --form localfile=@/tmp/resource.yaml
 
 
 echo $?
