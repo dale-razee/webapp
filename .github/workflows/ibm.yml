@@ -57,9 +57,9 @@ jobs:
           --build-arg GITHUB_REF="$GITHUB_REF" .
 
     # Push the image to IBM Container Registry
-    # - name: Push the image to ICR
-    #   run: |
-    #     docker push $REGISTRY_HOSTNAME/$ICR_NAMESPACE/$IMAGE_NAME:$GITHUB_SHA
+    - name: Push the image to ICR
+      run: |
+        docker push $REGISTRY_HOSTNAME/$ICR_NAMESPACE/$IMAGE_NAME:$GITHUB_SHA
 
         # ./build/process-template.sh kubernetes/webapp/resource.yaml > /tmp/resource.yaml
         # cat /tmp/resource.yaml
