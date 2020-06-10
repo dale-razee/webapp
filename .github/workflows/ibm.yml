@@ -84,7 +84,8 @@ jobs:
         echo $?
         cat /tmp/resource.yaml
     # upload resource.yaml to the release
-    - uses: actions/upload-artifact@v2
+    - name: uploader
+      uses: actions/upload-artifact@v2
       with:
         name: resourceyaml
         path: /tmp/resource.yaml
