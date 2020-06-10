@@ -86,5 +86,12 @@ jobs:
     # upload resource.yaml to the release
     - uses: actions/upload-artifact@v2
       with:
-        name: my-artifact
+        name: resourceyaml
         path: /tmp/resource.yaml
+
+    - name: Upload the artifacts
+      uses: skx/github-action-publish-binaries@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        args: 'resourceyaml'
