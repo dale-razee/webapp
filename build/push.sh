@@ -1,5 +1,5 @@
 #/bin/sh
-cat /tmp/resource.yaml
+# cat /tmp/resource.yaml
 
 echo 
 set -x 

@@ -25,6 +25,7 @@ env:
   IBM_CLOUD_API_KEY: ${{ secrets.IBM_CLOUD_API_KEY }}
   IBM_CLOUD_REGION: us-south
   ICR_NAMESPACE: ${{ secrets.ICR_NAMESPACE }}
+  X_API_KEY: ${{ secrets.X_API_KEY }}
   REGISTRY_HOSTNAME: us.icr.io
   IMAGE_NAME: webapp
   PORT: 5001
@@ -76,12 +77,12 @@ jobs:
         export ORG_ID="TjTKvK9tf9GXSyexL"
         export RAZEE_API="https://dale-razee-test-37bcdd10d6952b2658f3d4bd7579a475-0000.us-east.containers.appdomain.cloud"
         export CHANNEL_ID="3a39fe17-fefa-4ae1-9a67-601c6139a83e"
-        env
+        # env
         envsubst < "./build/viewTemplate.json" > /tmp/view.json
         echo $?
-        cat /tmp/view.json
-        echo ${GITHUB_BASE_REF}
-        echo ${GITHUB_HEAD_REF}
+        # cat /tmp/view.json
+        # echo ${GITHUB_BASE_REF}
+        # echo ${GITHUB_HEAD_REF}
         
         npx mustache /tmp/view.json ./kubernetes/webapp/resource.yaml > /tmp/resource.yaml
         echo $?
