@@ -90,9 +90,9 @@ jobs:
         name: resourceyaml
         path: /tmp/resource.yaml
 
-    - name: Upload the artifacts
-      uses: skx/github-action-publish-binaries@master
+    - name: Create GitHub release
+      uses: Roang-zero1/github-upload-release-artifacts-action@master
+      with:
+        args: /tmp/resource.yaml
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        args: 'resourceyaml'
