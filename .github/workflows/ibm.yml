@@ -83,3 +83,10 @@ jobs:
         npx mustache /tmp/view.json ./kubernetes/webapp/resource.yaml > /tmp/resource.yaml
         echo $?
         cat /tmp/resource.yaml
+    # upload resource.yaml to the release
+    - name: Upload the artifacts
+      uses: skx/github-action-publish-binaries@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        args: '/tmp/resource.yaml'
