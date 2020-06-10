@@ -9,7 +9,7 @@ items:
   apiVersion: apps/v1
   metadata:
     annotations:
-      version: "{{GITHUB_SHA}}"
+      version: "{{VERSION}}"
       razee.io/git-repo: "{{{GIT_REMOTE}}}"
       razee.io/commit-sha: "{{GITHUB_SHA}}"
     labels:
@@ -59,7 +59,7 @@ items:
     name: webapp-lb
     namespace: default
     annotations:
-      version: "{{GITHUB_SHA}}"
+      version: "{{VERSION}}"
       razee.io/git-repo: "{{{GIT_REMOTE}}}"
       razee.io/commit-sha: "{{GITHUB_SHA}}"
   spec:
