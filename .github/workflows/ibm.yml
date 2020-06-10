@@ -74,6 +74,7 @@ jobs:
         export GIT_PREFIX="https://github.com/"
         export GIT_REMOTE=${GIT_PREFIX}${GITHUB_REPO}
         export ORG_ID="TjTKvK9tf9GXSyexL"
+        export RAZEE_API="https://dale-razee-test-37bcdd10d6952b2658f3d4bd7579a475-0000.us-east.containers.appdomain.cloud"
         export CHANNEL_ID="3a39fe17-fefa-4ae1-9a67-601c6139a83e"
         env
         envsubst < "./build/viewTemplate.json" > /tmp/view.json
