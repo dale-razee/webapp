@@ -72,6 +72,7 @@ jobs:
       run: |
         # GITHUB_REF="refs/tags/0.0.10-9"
         export VERSION=$(echo "${GITHUB_REF}" | awk -F '/' '{print $3}') 
+        export GIT_REMOTE=$("https://github.com/${GITHUB_REPO}")
         echo "$VERSION"
         env
         envsubst < "./build/viewTemplate.json" > /tmp/view.json
