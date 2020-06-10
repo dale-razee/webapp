@@ -1,4 +1,9 @@
 {
     "GIT_REMOTE": "${GIT_REMOTE}",
-    "VERSION": "${VERSION}"
+    "VERSION": "${VERSION}",
+    "GITHUB_SHA": "${GITHUB_SHA}",
+    "GITHUB_REF": "${GITHUB_REF}",
+    "GITHUB_REPO": "${GITHUB_REPO}",
+    "GITHUB_HEAD_REF": "${GITHUB_HEAD_REF}",
+    "GITHUB_BASE_REF": "${GITHUB_BASE_REF}"
 }

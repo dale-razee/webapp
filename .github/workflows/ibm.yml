@@ -8,16 +8,20 @@
 
 name: Build and Deploy to IKS
 
-on:
-  release:
-    types: [created]
-
 # on:
-#   push
+#   release:
+#     types: [created]
+
+on:
+  push
 
 # Environment variables available to all jobs and steps in this workflow
 env:
   GITHUB_SHA: ${{ github.sha }}
+  GITHUB_REF: ${{ github.ref }}
+  GITHUB_REPO: ${{ github.repository }}
+  GITHUB_HEAD_REF: ${{ github.head_ref }}
+  GITHUB_BASE_REF: ${{ github.base_ref }}
   IBM_CLOUD_API_KEY: ${{ secrets.IBM_CLOUD_API_KEY }}
   IBM_CLOUD_REGION: us-south
   ICR_NAMESPACE: ${{ secrets.ICR_NAMESPACE }}
@@ -66,9 +70,10 @@ jobs:
     # create the resource.yaml file
     - name: Create resource.yaml
       run: |
-        env
         # GITHUB_REF="refs/tags/0.0.10-9"
         export VERSION=$(echo "${GITHUB_REF}" | awk -F '/' '{print $3}') 
+        echo "$VERSION"
+        env
         envsubst < "./build/viewTemplate.json" > /tmp/view.json
         echo $?
         cat /tmp/view.json
