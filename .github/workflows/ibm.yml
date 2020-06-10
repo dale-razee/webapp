@@ -90,9 +90,20 @@ jobs:
         name: resourceyaml
         path: /tmp/resource.yaml
 
+    # - name: Download 
+    #   uses: actions/download-artifact@v1
+    #   with:
+    #     name: resourceyaml
+
+    # - name: Upload math result for job 2
+    #   uses: actions/upload-artifact@v1
+    #   with:
+    #     name: resourceyaml
+    #     path: /tmp/resource.yaml
+
     - name: Create GitHub release
       uses: Roang-zero1/github-upload-release-artifacts-action@master
       with:
-        args: /tmp/resource.yaml
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        args: resourceyaml/tmp/resource.yaml
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
