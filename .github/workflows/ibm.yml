@@ -73,6 +73,8 @@ jobs:
         export VERSION=$(echo "${GITHUB_REF}" | awk -F '/' '{print $3}') 
         export GIT_PREFIX="https://github.com/"
         export GIT_REMOTE=${GIT_PREFIX}${GITHUB_REPO}
+        export ORG_ID="TjTKvK9tf9GXSyexL"
+        export CHANNEL_ID="3a39fe17-fefa-4ae1-9a67-601c6139a83e"
         env
         envsubst < "./build/viewTemplate.json" > /tmp/view.json
         echo $?
@@ -82,28 +84,29 @@ jobs:
         
         npx mustache /tmp/view.json ./kubernetes/webapp/resource.yaml > /tmp/resource.yaml
         echo $?
-        cat /tmp/resource.yaml
+        # cat /tmp/resource.yaml
+        ./build/push.sh
     # upload resource.yaml to the release
-    - name: uploader
-      uses: actions/upload-artifact@v2
-      with:
-        name: resourceyaml
-        path: /tmp/resource.yaml
-
-    # - name: Download 
-    #   uses: actions/download-artifact@v1
-    #   with:
-    #     name: resourceyaml
-
-    # - name: Upload math result for job 2
-    #   uses: actions/upload-artifact@v1
+    # - name: uploader
+    #   uses: actions/upload-artifact@v2
     #   with:
     #     name: resourceyaml
     #     path: /tmp/resource.yaml
 
-    - name: Create GitHub release
-      uses: Roang-zero1/github-upload-release-artifacts-action@master
-      with:
-        args: resourceyaml/tmp/resource.yaml
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    # # - name: Download 
+    # #   uses: actions/download-artifact@v1
+    # #   with:
+    # #     name: resourceyaml
+
+    # # - name: Upload math result for job 2
+    # #   uses: actions/upload-artifact@v1
+    # #   with:
+    # #     name: resourceyaml
+    # #     path: /tmp/resource.yaml
+
+    # - name: Create GitHub release
+    #   uses: Roang-zero1/github-upload-release-artifacts-action@master
+    #   with:
+    #     args: resourceyaml/tmp/resource.yaml
+    # env:
+    #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
